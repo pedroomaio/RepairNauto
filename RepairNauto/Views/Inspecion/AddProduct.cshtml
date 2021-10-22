@@ -1,0 +1,177 @@
+﻿@model AutoRepair.Models.AddItemViewModel
+@{
+    ViewData["Title"] = "AddProduct";
+}
+
+<h2>Add Inspecion</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddProduct">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="CarId" class="control-label"></label>
+                <select asp-for="CarId" asp-items="Model.Cars" class="form-control"></select>
+                <span asp-validation-for="CarId" class="text-danger"></span>
+            </div>
+
+
+
+
+            <div class="form-group">
+                <label for="serviceType" class="control-label">Choose your service type:</label>
+                <select id="serviceType" required onclick="serviceTypeFunction()" class="form-control">
+                    @if (ViewBag.serviceType != null)
+                    {
+                        <option value="">Select any one...</option>
+                        <option selected value="Packs">Chosen Service Pack</option>
+                        <option value="Custom">Custom</option>
+                    }
+                    else
+                    {
+                        <option selected value="">Select any one...</option>
+                        <option value="Packs">Chosen Service Pack</option>
+                        <option value="Custom">Custom</option>
+                    }
+                </select>
+            </div>
+
+
+
+            <div class="container" id="divPacks" style="margin-top: 4%; display: none; margin-bottom: 4%; margin-left: 21%; width: 100%; ">
+
+                <ul>
+                    @if (ViewBag.serviceType != null)
+                    {
+                        foreach (var item in ViewBag.serviceType)
+                        {
+                            <li>
+                                <div class="form-check">
+                                    <input type="checkbox" checked id="Check_@item.Id" />
+                                    <label for="Check_@item.Id">@item.ServiceName</label>
+                                </div>
+                            </li>
+                        }
+                        <li>
+                            <a class="btn btn-success" onclick="SaveList()">Update</a>
+                        </li>
+                    }
+                </ul>
+
+            </div>
+
+
+
+
+            <div class="container" id="divCustom" style="margin-top: 4%; display: none; margin-bottom: 4%; margin-left: 21%; width: 100%; ">
+
+                <ul>
+                    @if (ViewBag.serviceTypeAll != null)
+                    {
+                        @foreach (var item in ViewBag.serviceTypeAll)
+                        {
+
+                            <li>
+                                <div class="form-check">
+                                    <input type="checkbox" id="Check_@item.Id" />
+                                    <label for="Check_@item.Id">@item.ServiceName</label>
+                                </div>
+                            </li>
+                        }
+                        <li>
+                            <a class="btn btn-success" onclick="SaveList()">Update</a>
+                        </li>
+                    }
+                </ul>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Creater" class="btn btn-success">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+
+    var SaveList = function () {
+
+        var arrItem = [];
+        var commaSeparatedIds = "";
+
+        $("@ViewBag.serviceType li input[type=checkbox]").each(function (index, val) {
+
+            var checkId = $(val).attr("Id");
+
+            var arr = checkId.split('_');
+
+            var currentCheckboxId = arr[1];
+
+            var Ischecked = $("#" + checkId).is(":checked", true);
+
+            if (Ischecked) {
+                arrItem.push(currentCheckboxId);
+            }
+        })
+
+        if (arrItem.length != 0) {
+
+            commaSeparatedIds = arrItem.toString();
+
+            $.ajax({
+
+                url:"/Inspecion/GetServices",
+                type: "POST",
+                data: { ItemList: commaSeparatedIds },
+                success: function (response) {
+
+                }
+            })
+        }
+    }
+
+</script>
+
+<script>
+    function serviceTypeFunction() {
+        var x = document.getElementById("serviceType").value;
+
+        var divP = document.getElementById("divPacks");
+        var divC = document.getElementById("divCustom");
+
+
+        if (x == "Packs") {
+
+            divP.style.display = "flex";
+            divC.style.display = "none";
+
+        }
+        if (x == "Custom") {
+
+            divC.style.display = "flex";
+            divP.style.display = "none";
+        }
+
+    }
+
+    var x = document.getElementById("serviceType").value;
+
+    var divP = document.getElementById("divPacks");
+    var divC = document.getElementById("divCustom");
+
+
+    if (x == "Packs") {
+
+        divP.style.display = "flex";
+        divC.style.display = "none";
+
+    }
+    if (x == "Custom") {
+
+        divC.style.display = "flex";
+        divP.style.display = "none";
+    }
+</script>

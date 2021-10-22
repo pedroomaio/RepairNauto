@@ -1,0 +1,45 @@
+﻿@model AutoRepair.Data.Entities.Service
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Product Details</h1>
+
+<div>
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.ServiceName)
+                </dt>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+            </dl>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-3">
+
+                    @Html.DisplayFor(model => model.ServiceName)
+                </dt>
+                <dt class="col-sm-3">
+                    @Html.DisplayFor(model => model.Price)
+                </dt>
+            </dl>
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-success">Back to List</a>
+</div>
+
+

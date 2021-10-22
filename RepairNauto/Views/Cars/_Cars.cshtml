@@ -1,0 +1,79 @@
+﻿
+@model AutoRepair.Models.CarsViewModel
+<div class="form-group">
+    <label asp-for="RegisterCar" class="control-label"></label>
+    <input asp-for="RegisterCar" type="text" id="example" maxlength="12" onkeypress="myFunction()" class="form-control">
+    <span asp-validation-for="RegisterCar" class="text-danger"></span>
+</div>
+
+
+<div class="form-group">
+    <label asp-for="Colour" class="control-label"></label>
+    <input asp-for="Colour" class="form-control" />
+    <span asp-validation-for="Colour" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="ModelId" id="ModelId" class="control-label"></label>
+    <select asp-for="ModelId" asp-items="Model.Models" class="form-control"></select>
+    <span asp-validation-for="ModelId" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="BrandId" id="BrandId" class="control-label"></label>
+    <select asp-for="BrandId" asp-items="Model.Brands" class="form-control"></select>
+    <span asp-validation-for="BrandId" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Year" class="control-label"></label>
+    <div class="input-group date" data-provide="datepicker">
+        <input type="date" min="1999-01-01" data-date-format="DD MMMM YYYY" asp-for="Year" class="form-control">
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+</div>
+
+<script>
+    function myFunction() {
+        let str = document.getElementById("example").value;
+
+        if (str.length == 2) {
+            document.getElementById("example").value = str + " - ";
+        }
+
+        if (str.length == 7) {
+            document.getElementById("example").value = str + " - ";
+        }
+
+
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#@Model.ModelId").change(function () {
+            alert("qwe");
+            $("#BrandId").empty();
+            $.ajax({
+                url: '@Url.Action("GetBrandsAsync","Inspecion")',
+                type: 'POST',
+                dataType: 'json',
+                data: { modelId: $("#ModelId").val()},
+                success: function (brands) {
+                    debugger;
+                    $("#BrandId").append('<option value="0">(Select a brand...)</option>');
+                    $.each(brands, function (i, brand) {
+                        $("#BrandId").append('<option value="'
+                            + brand.id + '">'
+                            + brand.name + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    debugger;
+                    alert('Failed to retrieve brands.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+
+</script>
+

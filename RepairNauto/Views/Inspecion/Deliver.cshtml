@@ -1,0 +1,72 @@
+﻿@model AutoRepair.Models.MarkViewModel
+@{
+    ViewData["Title"] = "Complete inspection";
+}
+
+<h2>Complete inspection</h2>
+
+@if (ViewBag.Status == "In Processing")
+{
+    <form asp-action="Deliver">
+        <input type="submit" value="Complete" class="btn btn-primary" />
+    </form>
+}
+else if (ViewBag.Status == "Completed")
+{
+    <form asp-action="Deliver">
+        <input type="submit" value="Send and Finish this Inspecion" class="btn btn-primary" />
+    </form>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Deliver">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="DeliveryDate" class="control-label"></label>
+                    <div class="input-group date" data-provide="datepicker">
+                        <input type="date" asp-for="DeliveryDate" class="form-control">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                        </div>
+                        <span asp-validation-for="DeliveryDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InspecionHours" class="control-label"></label>
+                    <div class="input-group date" data-provide="datepicker">
+                        <input type="time" asp-for="InspecionHours" class="form-control">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                        </div>
+                        <span asp-validation-for="InspecionHours" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-success">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var userLang = navigator.language || navigator.userLanguage;
+                console.log(userLang);
+                var options = $.extend({}, // empty object
+                    $.datepicker.regional[pt - Pt], {
+                    dateFormat: "dd/mm/yyyy"
+                } // your custom options
+                );
+                $(".date").datepicker(options);
+            });
+        </script>
+    }
+}

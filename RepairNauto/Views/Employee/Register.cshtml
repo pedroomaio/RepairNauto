@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Sign up form -->
+<section class="signup">
+    <div class="signup-content">
+        <div class="signup-form">
+            <h2 class="form-title">Sign up</h2>
+            <form method="POST" class="register-form" id="register-form">
+
+                <partial name="_employee" />
+
+                <div class="form-group form-button">
+
+                    <input type="submit" name="signup" id="signup" onclick="teste();" class="form-submit" value="Register" />
+                    <a asp-action="Index" class="btn btn-success">Back to List</a>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Failed</h5>
+            </div>
+            <div class="modal-body">
+                <div asp-validation-summary="ModelOnly"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

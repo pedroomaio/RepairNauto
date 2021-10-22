@@ -1,0 +1,170 @@
+﻿@model IEnumerable<AutoRepair.Data.Entities.User>
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/Home/css/normalize.css">
+<link rel="stylesheet" href="~/Home/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Home/css/font-awesome/css/font-awesome.min.css" />
+
+<link rel="stylesheet" href="~/Home/css/magnific-popup.css">
+<link rel="stylesheet" href="~/Home/css/slider-pro.css">
+<link rel="stylesheet" href="~/Home/css/owl.carousel.css">
+<link rel="stylesheet" href="~/Home/css/owl.theme.css">
+<link rel="stylesheet" href="~/Home/css/owl.transitions.css">
+<link rel="stylesheet" href="~/Home/css/animate.css">
+<link rel="stylesheet" href="~/Home/elegant_font/style.css">
+<link rel="stylesheet" href="~/Home/css/style.css">
+
+<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+<header>
+    <nav class="navbar main-menu" style="background-color: #F8F8F8; height: 9%; ">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Img/Icon.png" width="50" /></a>
+
+            </div>
+
+            <div id="nav-menu" class="navbar-collapse collapse" role="navigation">
+                <ul class="nav navbar-nav menu-wrapper display-flex-center">
+
+                    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item dropdown text-dark">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inspecions</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Inspecion" asp-action="Creater">All Inspecions</a></li>
+                                <li><a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Inspecion" asp-action="Index">Inspecions History</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown text-dark">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Employee" asp-action="index">Employees</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="SendMail" asp-action="index">Send Email</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown text-dark">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customer Management</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="Index">All Cars</a></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Service" asp-action="Index">All Services</a></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Models" asp-action="Index">All Models</a></li>
+                            </ul>
+                        </li>
+                    }
+                    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Employee"))
+                    {
+                        <li class="nav-item">
+
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Inspecion" asp-action="Index">Marks</a>
+                        </li>
+                    }
+                    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Customer"))
+                    {
+
+                        <li class="nav-item dropdown text-dark">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inspecions</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Inspecion" asp-action="Creater">Your Inspecions</a></li>
+                                <li><a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Inspecion" asp-action="Index">Inspecions History</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Cars" asp-action="Index">Your Cars</a>
+                        </li>
+
+                    }
+                    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Mechanic"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Inspecion" asp-action="Index">Schedule</a>
+                        </li>
+                    }
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+
+                        <li class="nav-item dropdown text-dark" style=" margin-top: -4%;">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                @if (Model != null)
+                                {
+                                    @foreach (var item in Model)
+                                    {
+
+                                        @if (!string.IsNullOrEmpty(item.ImageFullPath))
+                                        {
+                                            <img src="@Url.Content(item.ImageFullPath)" alt="Image" style="width: 50px; height: 79px; max-width: 100%; border-radius: 50%; height: auto; " />
+
+                                        }
+
+
+                                    }
+                                }
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @*<li>
+                                        <a class="nav-link">@this.User.Identity.Name</a>
+                                    </li>*@
+                                <li><a class="nav-link" asp-area="" asp-controller="Account" asp-action="ChangeUser">Edit Profile</a></li>
+                                <li><a class="nav-link" asp-area="" asp-controller="Account" asp-action="ChangePassword">Change Password</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item" style="margin-top: -4%; ">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Account" asp-action="Logout">
+                                <lord-icon src="https://cdn.lordicon.com/lywgqtim.json"
+                                           trigger="loop-on-hover"
+                                           colors="primary:#000000,secondary:#000000"
+                                           style="width:50px;height:50px">
+                                </lord-icon>
+                            </a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color: black" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+</header>
+
+<script src="~/Home/js/jquery-1.11.3.min.js"></script>
+<script src="~/Home/js/bootstrap.min.js"></script>
+<script src="~/Home/js/modernizr.min.js"></script>
+<script src="~/Home/js/jquery.easing.1.3.js"></script>
+<script src="~/Home/js/jquery.scrollUp.min.js"></script>
+<script src="~/Home/js/jquery.easypiechart.js"></script>
+<script src="~/Home/js/isotope.pkgd.min.js"></script>
+<script src="~/Home/js/jquery.fitvids.js"></script>
+<script src="~/Home/js/jquery.stellar.min.js"></script>
+<script src="~/Home/js/jquery.waypoints.min.js"></script>
+<script src="~/Home/js/wow.min.js"></script>
+<script src="~/Home/js/jquery.nav.js"></script>
+<script src="~/Home/js/imagesloaded.pkgd.min.js"></script>
+<script src="~/Home/js/smooth-scroll.min.js"></script>
+<script src="~/Home/js/jquery.magnific-popup.min.js"></script>
+<script src="~/Home/js/jquery.sliderPro.min.js"></script>
+<script src="~/Home/js/owl.carousel.min.js"></script>
+<script src="~/Home/contact/jqBootstrapValidation.js"></script>
+<script src="~/Home/contact/contact_me.js"></script>
+<script src="http://maps.googleapis.com/maps/api/js">
+</script>

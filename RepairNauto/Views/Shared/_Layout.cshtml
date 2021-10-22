@@ -1,0 +1,196 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AutoRepair</title>
+
+    <link rel="stylesheet" href="~/Home/css/normalize.css">
+    <link rel="stylesheet" href="~/Home/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Home/css/font-awesome/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="~/Home/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Home/css/slider-pro.css">
+    <link rel="stylesheet" href="~/Home/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Home/css/owl.theme.css">
+    <link rel="stylesheet" href="~/Home/css/owl.transitions.css">
+    <link rel="stylesheet" href="~/Home/css/animate.css">
+    <link rel="stylesheet" href="~/Home/elegant_font/style.css">
+    <link rel="stylesheet" href="~/Home/css/style.css">
+
+    <script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+
+
+</head>
+<body>
+    <header>
+        <nav class="navbar main-menu" style="background-color: #F8F8F8; height: 9%; ">
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Img/Icon.png" width="50" /></a>
+
+                </div>
+
+                <div id="nav-menu" class="navbar-collapse collapse" role="navigation">
+                    <ul class="nav navbar-nav menu-wrapper display-flex-center">
+
+                        @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown text-dark">
+                                <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Employee" asp-action="index">Employees</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown text-dark">
+                                <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customers</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="Index">All Cars</a></li>
+                                    <li><a class="nav-link text-dark" asp-area="" asp-controller="Service" asp-action="Index">All Services</a></li>
+                                    <li><a class="nav-link text-dark" asp-area="" asp-controller="Models" asp-action="Index">All Models</a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Employee"))
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="SendMail" asp-action="Index">Send Email</a>
+                            </li>
+                        }
+                        @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Customer"))
+                        {
+                            <li class="nav-item dropdown text-dark">
+                                <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Inspecions</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Inspecion" asp-action="Creater">Your Inspecions</a></li>
+                                    <li><a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Inspecion" asp-action="Index">Inspecions History</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Cars" asp-action="Index">Your Cars</a>
+                            </li>
+                        }
+
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item dropdown text-dark">
+                                <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                    @*@if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+
+                            @if (!string.IsNullOrEmpty(item.ImageFullPath))
+                            {
+                                <img src="@Url.Content(item.ImageFullPath)" alt="Image" style="width: 50px; height: 79px; max-width: 100%; border-radius: 50%; height: auto; " />
+
+                            }
+
+
+                        }
+                    }*@
+                                    Your Profile
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    @*<li>
+                        <a class="nav-link">@this.User.Identity.Name</a>
+                    </li>*@
+                                    <li><a class="nav-link" asp-area="" asp-controller="Account" asp-action="ChangeUser">Edit Profile</a></li>
+                                    <li><a class="nav-link" asp-area="" asp-controller="Account" asp-action="ChangePassword">Change Password</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item" style="margin-top: -4%; ">
+                                <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Account" asp-action="Logout">
+                                    <lord-icon src="https://cdn.lordicon.com/lywgqtim.json"
+                                               trigger="loop-on-hover"
+                                               colors="primary:#000000,secondary:#000000"
+                                               style="width:50px;height:50px">
+                                    </lord-icon>
+                                </a>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color: black" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+
+    </header>
+
+    <div class="container">
+        <main role="main" style="margin-top:10%">
+            @RenderBody()
+        </main>
+    </div>
+
+    @*<section class="footer-container" style="position: fixed; left: 0; bottom: 0; width: 100%; background-color: #6C757D ">
+            <div class="container">
+                <div class="row footer-containertent">
+                    <div class="col-md-4">
+
+                        <img src="~/Img/Icon.png" width="50" alt="">
+                        <br />
+                        <br />
+                        <p>We are a new AutoRepair that with our products we always try to fund a solution to your problems every day.</p>
+
+                        <hr />
+                    </div>
+
+                    <div class="col-md-4 contac-us">
+                        <h3>Contact Us</h3>
+                        <ul>
+                            <li><i class="fa fa-phone"></i>001 123 12345 99</li>
+                            <li><i class="fa fa-envelope-o"></i>repairnauto@gmail.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background-color: #6C757D">
+
+            <div class="container">
+                <div class="row">
+                    <div class="footer-containertent">
+
+
+                        <br /><br />
+                        <p>Copyright © 2021      -      AutoRepair      -      Pedro Maio</p>
+                    </div>
+                </div>
+            </div>
+        </footer>*@
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="~/Home/js/modernizr.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+

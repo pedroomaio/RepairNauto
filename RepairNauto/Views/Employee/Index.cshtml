@@ -1,0 +1,97 @@
+﻿@model IEnumerable<AutoRepair.Data.Entities.User>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    <a asp-action="Register" class="btn btn-primary"><i class="fa fa-save"></i> Create New</a>
+</p>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Cars</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-hover table-responsive table-striped" id="MyTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                Full Name
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UserName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EmailConfirmed)
+                            </th> 
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsMechanic)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FullName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                                </td> 
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IsMechanic)
+                                </td>
+
+                                @*<td>
+                                        @if (!string.IsNullOrEmpty(item.ImageFullPath))
+                                        {
+                                            <img src="@Url.Content(item.ImageFullPath)" alt="Image" style="width:100px;height:150px;max-width:100%;height:auto;" />
+                                        }
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastPurchase)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastSale)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsAvailable)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Stock)
+                                    </td>*@
+                                <td>
+                                   @* <a asp-action="Edit" asp-route-id="@item.UserName" class="btn btn-warning">Edit</a>*@
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#MyTable').DataTable();
+        });
+    </script>
+}
+

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<AutoRepair.Data.Entities.User>
+
+
+<header>
+
+    <nav class="navbar main-menu" style="background-color: #F8F8F8 ">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/Img/Icon.png" width="50" /></a>
+
+            </div>
+
+            <div id="nav-menu" class="navbar-collapse collapse" role="navigation">
+                <ul class="nav navbar-nav menu-wrapper display-flex-center">
+
+                    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item dropdown text-dark">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Employee" asp-action="index">Employees</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown text-dark">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Customers</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="Index">All Cars</a></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="Service" asp-action="Index">All Services</a></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="SpecialistType" asp-action="Index">All Specialist Type</a></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="AutoPieces" asp-action="Index">All Auto Pieces</a></li>
+                            </ul>
+                        </li>
+                    }
+                    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Employee"))
+                    {
+                        <li class="nav-item">
+
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="" asp-action="Index">Marks</a>
+                        </li>
+                    }
+                    @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Customer"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Cars" asp-action="Index">Your Cars</a>
+                        </li>
+                    }
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item dropdown">
+
+                            @if (Model != null)
+                            {
+                                @foreach (var item in Model)
+                                {
+
+                                    @if (!string.IsNullOrEmpty(item.ImageFullPath))
+                                    {
+                                        <img src="@Url.Content(item.ImageFullPath)" alt="Image" style="width:50px;height:50px;max-width:100%;height:auto;" />
+
+                                    }
+
+
+                                }
+                            }
+
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @*<li>
+                                        <a class="nav-link">@this.User.Identity.Name</a>
+                                    </li>*@
+                                <li><a class="nav-link" asp-area="" asp-controller="Account" asp-action="ChangeUser">Edit Profile</a></li>
+                                <li><a class="nav-link" asp-area="" asp-controller="Account" asp-action="ResetPassword">Reset Password</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Account" asp-action="Logout">
+                                <lord-icon src="https://cdn.lordicon.com/lywgqtim.json"
+                                           trigger="loop-on-hover"
+                                           colors="primary:#000000,secondary:#000000"
+                                           style="width:50px;height:50px">
+                                </lord-icon>
+                            </a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color:black" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" style=" font-size: 15pt; color: black" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+</header>

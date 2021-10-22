@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AutoRepair.Data.Entities.InspecionDetailTemp>
+@{
+    ViewData["Title"] = "Creater";
+}
+
+<h2>Creater</h2>
+
+
+<p>
+    <a asp-action="AddProduct" class="btn btn-success">Add Inspecion</a>
+    <a asp-action="ConfirmOrder" class="btn btn-primary" id="btnConfirm">Confirm</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Car.RegisterCar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.RegisterCar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)€
+                </td>
+
+                <td id="@item.Id">
+                    <a asp-action="DeleteItem" asp-route-id="@item.Id" class="btn btn-danger" id="btnDeleteItem">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="confirmDialog" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm Inspecion Sucess</h4>
+            </div>
+            <div class="modal-body">
+                <p>Inspection created successfully, wait now until it is scheduled (you will receive a gmail)</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btnYesCon">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

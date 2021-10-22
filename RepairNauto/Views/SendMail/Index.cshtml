@@ -1,0 +1,55 @@
+﻿@model AutoRepair.Models.SendEmailViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section id="contact" class="section-wrapper contact-section" data-stellar-background-ratio="0.5">
+    <div class="parallax-overlay"></div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12 section-header wow fadeInDown section-header-parallax">
+                <h2><span class="highlight-text">Send Email</span></h2>
+            </div>
+
+            <div class="contact-details">
+
+                <div class="col-sm-offset-3 col-md-6 col-sm-6 col-xs-12 contact-form wow bounceInRight" style=" margin-top: -5%;">
+
+                    <form method="post" name="sentMessage" id="contactForm" novalidate>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="text" asp-for="Username" required class="form-control"
+                                       placeholder="Full Name" id="name"
+                                       data-validation-required-message="Subject" />
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="email" asp-for="SendGmail" class="form-control" placeholder="Email"
+                                       id="email" required
+                                       data-validation-required-message="Please enter your email" />
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <textarea rows="10" cols="100" class="form-control"
+                                          placeholder="Message" id="message" required
+                                          data-validation-required-message="Please enter your message" minlength="5"
+                                          data-validation-minlength-message="Min 5 characters"
+                                          maxlength="999" asp-for="Message" style="resize:none"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center" style=" margin-top: 4%;"> <button type="submit" class="btn btn-primary"><i class="fa fa-send"></i> Send Email</button></div>
+                        
+                        <div id="success"> </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

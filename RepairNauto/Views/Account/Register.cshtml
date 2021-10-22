@@ -1,0 +1,246 @@
+﻿@model AutoRepair.Models.RegisterNewUserViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/Account/fonts/material-icon/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" href="~/Account/css/style.css">
+<script src="~/Account/vendor/jquery/jquery.min.js"></script>
+<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+
+
+
+<!-- Sign up form -->
+<section class="signup">
+    <div class="container" style=" margin-top: 2%;">
+        <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">
+            <lord-icon src="https://cdn.lordicon.com/gmzxduhd.json"
+                       trigger="loop-on-hover"
+                       colors="primary:#121331,secondary:#000000"
+                       style="width: 50px; height: 50px;">
+            </lord-icon>
+        </a>
+
+        <div class="signin-content" style="padding-top: 0px; padding-bottom: 0px;">
+            <div class="signup-form">
+                <h2 class="form-title">Sign up</h2>
+                <form method="post" enctype="multipart/form-data" id="register-form">
+
+
+
+                    <div class="form-group">
+                        <input asp-for="ImageFile" class="form-control" type="file" />
+                        <span asp-validation-for="ImageFile" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input asp-for="FirstName" required type="text" id="name" placeholder="First Name" />
+                        <span asp-validation-for="FirstName" class="text-warning"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input asp-for="LastName" required type="text" id="name" placeholder="Last Name" />
+                        <span asp-validation-for="LastName" class="text-warning"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Username" for="email"><i class="zmdi zmdi-email"></i></label>
+                        <input asp-for="Username" required type="email" id="email" placeholder="Your Email" />
+                        <span asp-validation-for="Username" class="text-warning"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" for="pass"><i class="zmdi zmdi-phone"></i></label>
+                        <input asp-for="PhoneNumber" required id="pass" placeholder="PhoneNumber" />
+                        <span asp-validation-for="Password" class="text-warning"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" for="pass"><i class="zmdi zmdi-lock"></i></label>
+                        <input asp-for="Password" required type="password" id="pass" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-warning"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Confirm" for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                        <input asp-for="Confirm" required type="password" id="re_pass" placeholder="Repeat your password" />
+                        <span asp-validation-for="Confirm" class="text-warning"></span>
+                    </div>  <div class="form-group">
+                        <label asp-for="Address"><i class="zmdi zmdi-store"></i></label>
+                        <input asp-for="Address" required type="text" placeholder="Address" />
+                        <span asp-validation-for="Address" class="text-warning"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" required asp-for="AgreeTerm" name="agree-term" id="agree-term" class="agree-term" />
+                        <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" data-target="#termsServiceModal" data-toggle="modal" class="term-service">Terms of service</a></label>
+                        <span asp-validation-for="AgreeTerm" class="text-warning"></span>
+
+                    </div>
+                    <div class="form-group form-button">
+
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+
+
+                    </div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </form>
+            </div>
+            <div class="signup-image">
+                <figure><img src="images/signup-image.jpg" alt="sing up image"></figure>
+                <a asp-action="Login" class="signup-image-link">I am already member</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@*@if (ViewBag.message == "error")
+    {
+        <script type="text/javascript">
+
+
+            alert("qwe");
+            $("#confirmDialog").modal("show");
+            return false;
+
+            /**/
+
+
+            //$("#btnConfirm").click(function () {
+
+            //    var checkedValue = $('.agree-term:checked').val();
+
+            //    if (checkedValue != "true") {
+            //        alert(checkedValue);
+
+
+
+            //    }
+
+            //});
+
+
+        </script>
+    }
+    else
+    {
+        <script>
+            alert("123");
+        </script>
+    }
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Failed</h5>
+                </div>
+                <div class="modal-body">
+                    <div asp-validation-summary="ModelOnly"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+<div class="modal fade" id="termsServiceModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">Terms of service</h1>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="content">
+                        <br />
+                        <h5><b>1. Who can use the Services</b></h5>
+                        <br />
+                        You may use the Services only if you agree to enter into a binding contract with RepaiAuto and are not a person barred from receiving services under the laws of the applicable jurisdiction.
+                        <br />
+                        <br />
+                        In any event, you must be at least 13 years of age, or in the case of Periscope 16 years of age, to use the Services.
+                        <br />
+                        <br />
+                        If you are accepting these Terms and using the Services on behalf of a company, organization, government or other legal entity, you represent and warrant that you are authorized to take such action and that you have the power to bind such entity to these Terms, in which case The words "you" and "your" as used in these Terms shall refer to such entity.
+                        <br />
+                        <br />
+                        <br />
+                        <h5><b>2. Privacy</b></h5>
+                        <br />
+                        Our Privacy Policy describes how we handle the information you provide when using our Services.
+                        <br />
+                        <br />
+                        You understand that by using the Services, you agree to the collection and use (as set forth in the Privacy Policy) of this information, including the transfer of such information to the United States, Ireland and/or other countries for the purposes of storage, processing and use by RepairNauto and its affiliates.
+                        <br />
+                        <br />
+                        <br />
+                        <h5><b>3. Content on the Services</b></h5>
+                        <br />
+                        You are responsible for your use of the Services and any Content provided, including compliance with applicable laws, rules and regulations. You should only provide Content that you are comfortable sharing with others.
+                        <br />
+                        <br />
+                        Any use or reliance on any Content or materials published by the Services or obtained by you through the Services is at your own risk. We do not approve, support, represent or warrant the completeness, truthfulness, accuracy or reliability of any Content or communication posted by the Services, nor do we endorse any opinions expressed by them.
+                        <br />
+                        <br />
+                        You understand that by using the Services, you may be exposed to Content that is offensive, harmful, inaccurate, inappropriate or, in some cases, improperly identified or fraudulent postings.
+                        <br />
+                        <br />
+                        All Content is the sole responsibility of the person who created it. We cannot monitor or control the Content posted by the Services, and we cannot be responsible for such Content.
+                        <br />
+                        <br />
+                        <br />
+                        <h5><b>4. Use of Services</b></h5>
+                        <br />
+                        Our Services are constantly evolving. As such, the Services may change from time to time in our sole discretion. We may discontinue (permanently or temporarily) providing the Services or any features on the Services to you or users generally. We may also retain the right to create usage and storage limits at our sole discretion at any time.<br /> We may also remove or refuse distribution of any Content on the Services, limit the distribution or visibility of any Content on the Service, suspend or terminate user accounts, and retrieve usernames without liability to you. RepairAuto may offer certain services or features for a fee. By paying for or using one of our services, you agree to any additional terms applicable to that service.
+                        <br />
+                        <br />
+                        In consideration of RepairAuto granting you access to and use of the Services, you agree that RepairAuto and its third-party providers and partners may place advertisements on the Services or in connection with the display of Content or information from the Services, submitted by you or by other people.
+                        <br />
+                        <br />
+                        <br />
+                        <h5><b>5. General</b></h5>
+                        <br />
+                        We may revise these Terms from time to time. Modifications will not be retroactive, and the most up-to-date version of the Terms will govern our relationship with you. Except in the case of changes to new functions or that are made to meet legal demands, you will be notified 30 days prior to the effective date of changes to these Terms that affect rights or obligations of any part of these Terms, for example , either by notification by the service or by an email sent to the email account associated with your account.<br /><br /> By continuing to access or use the Services after the effective date of the revisions, you agree to be bound by the amended version of the Terms.
+                        <br />
+                        <br />
+                        If you live outside the European Union, the European Free Trade Association Countries or the United Kingdom, including if you live in the United States, the laws of the State of California, excluding its statutory provisions, will govern these terms in any dispute that arises between you. and RepaiNauto.<br /><br /> All disputes relating to these terms or Services will be brought exclusively in federal or state courts located in San Francisco County, California, United States, and you consent to personal jurisdiction and waive any objection to an inconvenient forum.
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@*<div id="confirmDialog" class="modal fade">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirm Order</h4>
+                    <button type="button" class="close" data-dismiss="modal"><i class="fa fa-window-close"></i></button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to confirm the order ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btnYesConfirm">Yes</button>
+                    <button type="button" class="btn btn-success" id="btnNoConfirm">No</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
